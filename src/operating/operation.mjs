@@ -253,7 +253,9 @@ export function operationAs(source, verb = source.verb) {
   ...(source.locus === undefined ? {} : { locus: source.locus }),
   ...(source.runTerm === undefined ? {} : { runTerm: source.runTerm }),
   ...(source.inputDescriptor === undefined ? {} : { inputDescriptor: source.inputDescriptor, outputDescriptor: source.outputDescriptor }),
-  ...(source.body?.kind === "jsnode" ? {} : { run: (input, args, context) => source.execute(input, args, context) }),
+  // The alias carries its source's one body: its programme, its SEN term, or else a host run that
+  // defers to the source. Execution always defers to the source (bindExecution).
+  ...(source.body?.kind === "jsnode" || source.runTerm !== undefined ? {} : { run: (input, args, context) => source.execute(input, args, context) }),
   });
   return bindExecution(alias, (input, args, context) => source.execute(input, args, context));
 }

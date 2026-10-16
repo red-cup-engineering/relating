@@ -175,6 +175,10 @@ function senBody(spec) {
  * binds the host body or SEN term at construction and checks each invocation.
  */
 export function operation(spec) {
+  // One operation has one body: a host function, a SEN term, or a JavaScript program. Carrying a
+  // second would let what the operation is said to do (its portable term) differ from what it does.
+  if (spec.run !== undefined && spec.runTerm !== undefined) throw new TypeError(`operation ${spec.verb}: run and runTerm are mutually exclusive`);
+  if (spec.program !== undefined && (spec.run !== undefined || spec.runTerm !== undefined)) throw new TypeError(`operation ${spec.verb}: a program body excludes run and runTerm`);
   const value = { ...operationDeclaration(spec) };
   const program = spec.program === undefined ? undefined : value.body;
   const execute = createOperationExecutor({

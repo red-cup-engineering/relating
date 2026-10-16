@@ -45,6 +45,9 @@ export function operationDeclaration(spec) {
   const program = spec.program === undefined ? undefined : Object.freeze({ kind: spec.program.kind, closure: spec.program.closure, module: spec.program.module, export: spec.program.export });
   if (program !== undefined && (program.kind !== "jsnode" || ![program.closure, program.module, program.export].every(value => typeof value === "string" && value.length > 0))) throw new TypeError("operation: invalid addressed JavaScript programme");
   if (spec.program !== undefined && (spec.run !== undefined || spec.runTerm !== undefined)) throw new TypeError("operation: an addressed programme cannot substitute a host callback");
+  // One operation has one body. A host run beside a SEN runTerm would execute the one and carry the
+  // other, so what the operation is said to do could differ from what it does. A nullish run is no body.
+  if (spec.run != null && spec.runTerm !== undefined) throw new TypeError(`operation ${spec.verb}: run and runTerm are mutually exclusive`);
   if ("domainSchema" in record || "codomainSchema" in record) {
     throw new TypeError("operation: schema refs are projected from domain/codomain objects; pass SchemaContract objects");
   }

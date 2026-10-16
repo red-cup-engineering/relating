@@ -13,6 +13,7 @@ test("existing utterance logs reconstitute shared objects without changing persi
     { token: JSON.parse('{"__proto__":{"observed":true},"constructor":"held"}'), claim: false },
   ] };
   const admitted = rehydrateUtterances(saved);
-  assert.ok(admitted.every((value) => value.token instanceof scientific.Token && value.claim instanceof scientific.Claim));
+  // SignCell carriers are plain data: an admitted utterance is recognized by its shape, never by a class.
+  assert.ok(admitted.every((value) => scientific.isUtterance(value)));
   assert.deepEqual(dehydrateUtterances(admitted), saved);
 });

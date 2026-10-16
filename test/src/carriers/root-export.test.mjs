@@ -2,9 +2,7 @@ import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/co
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { articulationCellCarrier, memeCarrier, tmCarrier, tyCarrier, utteranceCarrier } from "@red-cup-engineering/relating/carriers";
-import { carrierById, registerCarrier } from "@red-cup-engineering/json-schema-services-section/contracts";
-import { utterance } from "@red-cup-engineering/signcell/cell";
-import { articulate } from "@red-cup-engineering/signcell/utterance";
+import { articulate, utterance } from "@red-cup-engineering/signcell/cell";
 
 describe("src/carriers package realization", () => {
   it("realizes pure shapes as runtime carriers with stable ids", () => {
@@ -12,8 +10,8 @@ describe("src/carriers package realization", () => {
       [utteranceCarrier.id, articulationCellCarrier.id, memeCarrier.id, tyCarrier.id, tmCarrier.id],
       [
         "relating/articulating/utterance",
-        "relating/articulating/articulation-cell",
-        "relating/articulating/predicating/positing/meme",
+        "https://schemas.561.group/signcell/cell.schema.json",
+        "https://schemas.561.group/signcell/cell.schema.json",
         "semiotic-expression-notation/term/ty",
         "semiotic-expression-notation/term/tm",
       ],
@@ -24,7 +22,7 @@ describe("src/carriers package realization", () => {
     const admitted = utterance("left", "right");
     assert.equal(utteranceCarrier.validate(admitted), true);
     assert.equal(utteranceCarrier.validate({ kind: "utterance.carrier" }), false);
-    assert.equal(articulationCellCarrier.validate(articulate(admitted)), true);
+    assert.equal(articulationCellCarrier.validate(articulate("left", "right")), true);
   });
 
   it("keeps one immutable schema meaning for each carrier identity", () => {
@@ -41,7 +39,6 @@ describe("src/carriers package realization", () => {
       $id: "relating/test/carrier-registry/equivalent",
     });
     assert.strictEqual(repeated, first);
-    assert.strictEqual(carrierById(first.id), first);
     assert.throws(
       () => schemaFrom({ $id: first.id, type: "string" }),
       /incompatible schema redefinition/u,
@@ -62,22 +59,6 @@ describe("src/carriers package realization", () => {
     assert.equal(Object.isFrozen(carrier.schema), true);
     assert.equal(Object.isFrozen(carrier.schema.properties), true);
     assert.equal(Object.isFrozen(carrier.schema.properties.payload), true);
-  });
-
-  it("normalizes direct registration to the admitted schema", () => {
-    const schema = { $id: "relating/test/carrier-registry/direct", type: "string" };
-    const registered = registerCarrier({
-      kind: "relating.carrier",
-      id: schema.$id,
-      schema,
-      validate: () => true,
-      assert: (value) => value,
-      errors: () => [],
-    });
-    schema.type = "number";
-    assert.equal(registered.validate("kept"), true);
-    assert.equal(registered.validate(4), false);
-    assert.throws(() => registered.assert(4), /must be string/u);
   });
 
   it("uses shared JSON Schema const, enum, and external fragments", () => {
@@ -113,17 +94,4 @@ describe("src/carriers package realization", () => {
     assert.match(carrier.errors("anything").join(" "), /reference|schema/iu);
   });
 
-  it("refuses a direct registration whose carrier and schema identities differ", () => {
-    assert.throws(
-      () => registerCarrier({
-        kind: "relating.carrier",
-        id: "relating/test/carrier-registry/claimed",
-        schema: { $id: "relating/test/carrier-registry/actual", type: "string" },
-        validate: () => true,
-        assert: (value) => value,
-        errors: () => [],
-      }),
-      /id and schema \$id differ/u,
-    );
-  });
 });

@@ -4,7 +4,7 @@
  * and coincidence) exposed as FeltOS operations. Every body is relating's.
  */
 import { actions } from "@red-cup-engineering/relating/actions";
-import { operationAs } from "@red-cup-engineering/computer-system-engine/rpc/operation";
+import { operationAs } from "../operating/operation.mjs";
 
 const adopt = (verb, as) => operationAs(actions.find((action) => action.verb === verb), as);
 

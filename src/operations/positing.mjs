@@ -3,7 +3,7 @@
  * of a reading, exposed as a FeltOS operation.
  */
 import { actions } from "@red-cup-engineering/relating/actions";
-import { operationAs } from "@red-cup-engineering/computer-system-engine/rpc/operation";
+import { operationAs } from "../operating/operation.mjs";
 
 const adopt = (verb, as) => operationAs(actions.find((action) => action.verb === verb), as);
 

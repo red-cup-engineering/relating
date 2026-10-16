@@ -29,7 +29,7 @@
  * JSON.parse(report.stdout).termUses; // ["lam", "prim", "var"]
  * ```
  */
-import { operation } from "@red-cup-engineering/computer-system-engine/rpc/operation";
+import { operation } from "../operating/operation.mjs";
 import { isUtterance, utterance } from "@red-cup-engineering/signcell/cell";
 import { utteranceCarrier, articulationCellCarrier } from "../carriers/index.mjs";
 import { tm } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";

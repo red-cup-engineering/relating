@@ -25,7 +25,7 @@ test("Relating selects resumable transport from an explicit Scott filtration", (
   assert.equal(result.finality, "approximation");
   assert.equal(result.transport, "event-stream");
   assert.equal(result.continuation, "last-event-id");
-  assert.equal(result.classification.nonScottFirings.length, 0);
+  assert.equal(result.classification.nonScottFirings, 0);
   assert.equal(TRANSPORT_WORK[result.transport].operation, "settled");
 });
 

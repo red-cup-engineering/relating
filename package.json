@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/relating",
-  "version": "0.10.8",
+  "version": "0.11.0",
   "license": "UNLICENSED",
   "type": "module",
   "description": "Relating: one boundary system where actions project to CLI, HTTP, OpenAPI, MCP, and docs from one registry, and each carrier is one JSON-Schema literal interpreted by FromSchema and the runtime validator.",
@@ -50,7 +50,8 @@
     "./operation-declaration": "./src/operating/operation-declaration.mjs",
     "./execution-context": "./src/operating/execution-context.mjs",
     "./wire": "./src/operating/wire.mjs",
-    "./wire-eavt-tuple": "./src/operating/wire-eavt-tuple.mjs"
+    "./wire-eavt-tuple": "./src/operating/wire-eavt-tuple.mjs",
+    "./running/transport-work": "./src/running/transport-work.mjs"
   },
   "devDependencies": {
     "@red-cup-engineering/computer-content-address-engineering-services-section": "0.2.0"

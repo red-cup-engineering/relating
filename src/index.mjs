@@ -15,7 +15,11 @@ import { classifyRegimeTerm, cohomologyVanishesInRegimeTerm, measureIsValuationT
 export * from "./carriers/index.mjs";
 export * from "./actions/index.mjs";
 
-export { sessionWork, TRANSPORT_WORK } from "./running/transport-work.mjs";
+export {
+  sessionWork, TRANSPORT_WORK, codomainSettlementWitness,
+  classificationOfWitness, settlementSignature, actionSettlementSignature,
+  codomainSettlementWitnessKey,
+} from "./running/transport-work.mjs";
 export { openSession, claim, judge, conflicts, sessionRegime, settle } from "./running/session.mjs";
 
 // confine/readContentResource/listContentEntries/readContentTree (ledger/store.mjs) are not
@@ -31,10 +35,10 @@ export { intentOfExtentTerm, extentOfIntentTerm, closeExtentTerm, isConceptPairT
 
 export * as carriers from "./carriers/index.mjs";
 
-import { sessionWork, TRANSPORT_WORK } from "./running/transport-work.mjs";
+import { sessionWork, TRANSPORT_WORK, actionSettlementSignature } from "./running/transport-work.mjs";
 import { openSession, claim, judge, conflicts, sessionRegime, settle as settle_2 } from "./running/session.mjs";
 
-export const running = Object.freeze({ sessionWork, TRANSPORT_WORK, openSession, claim, judge, conflicts, sessionRegime, settle: settle_2 });
+export const running = Object.freeze({ sessionWork, TRANSPORT_WORK, actionSettlementSignature, openSession, claim, judge, conflicts, sessionRegime, settle: settle_2 });
 
 
 

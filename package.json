@@ -4,6 +4,11 @@
   "license": "UNLICENSED",
   "type": "module",
   "description": "Relating: one boundary system where actions project to CLI, HTTP, OpenAPI, MCP, and docs from one registry, and each carrier is one JSON-Schema literal interpreted by FromSchema and the runtime validator.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/agent-organization-engine.git",
+    "directory": "lib/relating"
+  },
   "engines": {
     "node": ">=22.18"
   },

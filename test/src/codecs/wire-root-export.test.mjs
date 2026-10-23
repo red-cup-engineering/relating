@@ -3,6 +3,20 @@ import assert from "node:assert/strict";
 import { WIRE_CODEC_NAMES, senCodec, wireByMediaType, wireCodec, wireOf } from "../../../src/operating/wire.mjs";
 
 describe("the wire codecs relating's operations are carried by", () => {
+  it("keeps the open projector adapter without inherited media-type metadata", () => {
+    for (const type of ["constructor", "toString", "__proto__", "custom-projector"]) {
+      const projector = { type, corner: "data", rung: "strict", recognize: () => true, read: text => [text], write: value => String(value) };
+      assert.equal(wireOf(projector).mediaType, "application/octet-stream");
+      assert.equal(wireOf(projector, { mediaType: "application/custom" }).mediaType, "application/custom");
+    }
+  });
+  it("refuses prototype names outside the finite vocabulary", () => {
+    for (const name of ["constructor", "toString", "__proto__", "hasOwnProperty", "not-a-wire"])
+      assert.throws(() => wireCodec(name), {
+        name: "TypeError",
+        message: `unknown wire codec ${JSON.stringify(name)}; known: ${WIRE_CODEC_NAMES.join(", ")}`,
+      });
+  });
   it("owns the finite wire vocabulary at the boundary/wire leaf", () => {
     assert.deepEqual(WIRE_CODEC_NAMES, ["eavt", "form", "json", "mermaid", "plantuml", "sen", "string", "svg", "xmi"]);
     assert.equal(wireCodec("json").mediaType.split(";")[0], "application/json");

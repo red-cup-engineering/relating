@@ -1,3 +1,5 @@
+import { WIRE_MEDIA_TYPES, WIRE_CODEC_NAMES, requireWireName, assertWireRegistry } from "./wire-vocabulary.mjs";
+export { WIRE_CODEC_NAMES } from "./wire-vocabulary.mjs";
 /**
  * codecs/boundary/wire - the argv-selectable wire vocabulary, derived from
  * concrete representation projectors.
@@ -48,21 +50,6 @@ import {
 
                                                              
 
-/** The media type each wire serves, keyed by projector `type`. The wire byte
- *  form is identical to the prior hand-rolled vocabulary; the corner/rung now ride
- *  along from the projector. */
-const WIRE_MEDIA_TYPES                                   = Object.freeze({
-  string: "text/plain; charset=utf-8",
-  json: "application/json; charset=utf-8",
-  eavt: "application/eavt+jsonl; charset=utf-8",
-  form: "application/x-www-form-urlencoded; charset=utf-8",
-  sen: "application/sen+json; charset=utf-8",
-  svg: "image/svg+xml; charset=utf-8",
-  mermaid: "text/vnd.mermaid; charset=utf-8",
-  xmi: "application/xmi+xml; charset=utf-8",
-  plantuml: "text/x-plantuml; charset=utf-8",
-});
-
 /** Adapt one graded `writing` projector into an argv-selectable wire codec.
  *
  *  `decode` reads the boundary document into a single carrier value; `encode`
@@ -86,7 +73,7 @@ export function wireOf(
     );
   }
   const name = overrides.name ?? projector.type;
-  const mediaType = overrides.mediaType ?? WIRE_MEDIA_TYPES[name] ?? "application/octet-stream";
+  const mediaType = overrides.mediaType ?? (Object.hasOwn(WIRE_MEDIA_TYPES, name) ? WIRE_MEDIA_TYPES[name] : "application/octet-stream");
   const read = projector.read;
   const write = projector.write;
   const decode =
@@ -204,15 +191,12 @@ const REGISTRY                                      = Object.freeze({
 });
 
 /** The available wire codec names — the finite vocabulary. */
-export const WIRE_CODEC_NAMES                    = Object.freeze(Object.keys(REGISTRY).sort());
+assertWireRegistry(REGISTRY);
 
 /** Resolve a wire codec by name, or throw — the vocabulary witness. */
 export function wireCodec(name        )            {
-  const codec = REGISTRY[name];
-  if (codec === undefined) {
-    throw new TypeError(`unknown wire codec ${JSON.stringify(name)}; known: ${WIRE_CODEC_NAMES.join(", ")}`);
-  }
-  return codec;
+  requireWireName(name);
+  return REGISTRY[name];
 }
 
 /** The wire codec whose media type matches, or undefined — the inverse of

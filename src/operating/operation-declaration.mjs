@@ -8,7 +8,7 @@ import { schemaFromGraph } from "@red-cup-engineering/json-schema-services-secti
 import { ty } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
 import { checkTy } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/typing";
 import { descriptorTy } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/json-codec";
-import { wireCodec } from "./wire-eavt-tuple.mjs";
+import { requireWireName } from "./wire-vocabulary.mjs";
 
 function effectsOf(spec) {
   if (spec.effects !== undefined) return Object.freeze({ ...spec.effects });
@@ -58,8 +58,8 @@ export function operationDeclaration(spec) {
   if (spec.locus !== undefined && (typeof spec.locus !== "string" || spec.locus === "")) throw new TypeError(`operation ${spec.verb}: locus names an input field`);
   const inName = spec.inputFormat ?? "json";
   const outName = spec.outputFormat ?? "json";
-  wireCodec(inName);
-  wireCodec(outName);
+  requireWireName(inName);
+  requireWireName(outName);
   const effects = effectsOf(spec);
   const declaration = Object.freeze({
     kind: "metroplat.rpc.operation-declaration",

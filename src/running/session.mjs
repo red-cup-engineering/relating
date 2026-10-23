@@ -49,6 +49,10 @@ export const isSessionReading = (value) => isReading(value, CLAIM_SESSION_FAMILY
 
 /** Open an empty session whose readings are named in `family` (a SignChain reading family). */
 export function openSession(family = "knowledge") {
+  // An invented reading family would let the very first Claim enter without
+  // being interpretable in SignChain's FOUR algebra. Admit the canonical
+  // family before any session writes or institutional Work consumes it.
+  readingAs(family, "absurd");
   return { claims: [], closed: false, family };
 }
 
@@ -57,7 +61,12 @@ const familyOfSession = (session) => session.family ?? "knowledge";
 /** Append one claim — never overwriting an earlier one. A closed session is inert. */
 export function claim(session, cell, reading) {
   if (session.closed) return session;
-  return { ...session, claims: [...session.claims, { cell, reading }] };
+  const family = familyOfSession(session);
+  // Every claim, including the FIRST, must denote a genuine FOUR reading.
+  // Normalize the given reading to the current session's declared family;
+  // otherwise a lone unknown string would pass through judge() unchanged.
+  const canonical = readingAs(family, reading);
+  return { ...session, claims: [...session.claims, { cell, reading: canonical }] };
 }
 
 /** Utter a claim as the caller's own identity (the token) asserting some content
@@ -75,8 +84,12 @@ export function judge(session) {
   const family = familyOfSession(session);
   const byCell = new Map();
   for (const { cell, reading } of session.claims) {
+    // Historical externally reconstructed sessions cannot bypass the boundary
+    // merely because a cell was asserted once. Re-admit original FOUR values
+    // and preserve the whole non-overwriting evidence history.
+    const canonical = readingAs(family, reading);
     const prior = byCell.get(cell);
-    byCell.set(cell, prior === undefined ? reading : joinClaimReadings(prior, reading, family));
+    byCell.set(cell, prior === undefined ? canonical : joinClaimReadings(prior, canonical, family));
   }
   return byCell;
 }

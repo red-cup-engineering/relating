@@ -4,7 +4,7 @@
  */
 import { artifactId } from "@red-cup-engineering/semiotic-eavt-services-section/identity";
 import { canonicalJson, canonicalizeJson, JSON_RESOURCE_ENVELOPE } from "@red-cup-engineering/json-services-section";
-import { schemaFromGraph } from "@red-cup-engineering/json-schema-graph/contracts";
+import { schemaFromGraph } from "@red-cup-engineering/json-schema-services-section/contracts";
 import { ty } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
 import { checkTy } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/typing";
 import { descriptorTy } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/json-codec";
@@ -153,10 +153,39 @@ export function operationDescriptor(operationValue) {
 }
 
 
+const invalidJsonResource = Object.freeze(["/ invalid-json-value: must be a bounded JSON resource"]);
+
+function admitDescriptorInstance(candidate) {
+  try {
+    return { ok: true, value: canonicalizeJson(candidate, JSON_RESOURCE_ENVELOPE).value };
+  } catch {
+    return { ok: false };
+  }
+}
+
 export function schemaContractFromDescriptor(descriptor) {
   if (descriptor === undefined) return undefined;
-  return schemaFromGraph({ root: descriptor.id, schemas: [descriptor, ...descriptor.references]
+  const contract = schemaFromGraph({ root: descriptor.id, schemas: [descriptor, ...descriptor.references]
     .map(({ id, schema }) => ({ id, schema })) });
+  if (contract.schema["x-561-instance-profile"] !== "json-resource-v1") return contract;
+
+  return Object.freeze({
+    ...contract,
+    validate(candidate) {
+      const admitted = admitDescriptorInstance(candidate);
+      return admitted.ok && contract.validate(admitted.value);
+    },
+    errors(candidate) {
+      const admitted = admitDescriptorInstance(candidate);
+      return admitted.ok ? contract.errors(admitted.value) : invalidJsonResource;
+    },
+    assert(candidate, context = contract.id) {
+      const admitted = admitDescriptorInstance(candidate);
+      if (!admitted.ok) throw new TypeError(`${context}: ${invalidJsonResource[0]}`);
+      contract.assert(admitted.value, context);
+      return candidate;
+    },
+  });
 }
 
 /** Original lazy-operation admission, shared by build-time receiving and runtime discovery.

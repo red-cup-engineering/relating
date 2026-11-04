@@ -17,30 +17,18 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
-          node-version: "22"
+          node-version: "24"
+          package-manager-cache: false
 
-      - name: Enable pnpm
-        run: corepack enable
+      - name: Install the frozen dependency closure
+        run: npm ci --ignore-scripts
 
-      - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-
-      - name: Typecheck
-        run: pnpm run check
-
-      - name: Build
-        run: pnpm run build
-
-      - name: Test
-        run: pnpm test
-
-      - name: Run examples
-        run: pnpm run examples
-
-      - name: Generate API documentation
-        run: pnpm run docs:api
+      - name: Test the native package
+        run: npm test

@@ -15,7 +15,9 @@
  * the callable process surface.
  */
 
-import { executeJavascriptProgram } from "@red-cup-engineering/javascript-module-closure-service";
+// Select the supplier's execution carrier without importing its Node-only loader
+// into workerd. Source capture/admission remains a separate Node-hosted capability.
+import { executeJavascriptProgram } from "@red-cup-engineering/javascript-module-closure-service/execute-javascript-program";
 import { mark, utterance } from "@red-cup-engineering/signcell/utterance";
 import { createOperationExecutor } from "@red-cup-engineering/computer-code-engineering-services-section/typed-operation";
 import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";

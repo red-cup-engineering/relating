@@ -2,7 +2,7 @@
  * Host callbacks may be carried from their real owner but are never invoked here.
  * JSNode source capture is supplied by its native owner; this layer never guesses it.
  */
-import { artifactId } from "@red-cup-engineering/semiotic-eavt-services-section/identity";
+import { artifactId } from "@red-cup-engineering/semiotic-eavt-engineering-services-section/identity";
 import { canonicalJson, canonicalizeJson, JSON_RESOURCE_ENVELOPE } from "@red-cup-engineering/json-services-section";
 import { schemaFromGraph } from "@red-cup-engineering/json-schema-services-section/contracts";
 import { ty } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";

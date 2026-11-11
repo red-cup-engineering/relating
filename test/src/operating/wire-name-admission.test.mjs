@@ -3,7 +3,7 @@ import test from 'node:test';
 import { readFileSync } from 'node:fs';
 import { operationDeclaration, operationDescriptor } from '../../../src/operating/operation-declaration.mjs';
 import { WIRE_MEDIA_TYPES, WIRE_CODEC_NAMES, requireWireName, assertWireRegistry } from '../../../src/operating/wire-vocabulary.mjs';
-import { artifactId } from '@red-cup-engineering/semiotic-eavt-services-section/identity';
+import { artifactId } from '@red-cup-engineering/semiotic-eavt-engineering-services-section/identity';
 
 test('inert vocabulary derives every original name from the existing media metadata', () => {
   assert.deepEqual(WIRE_CODEC_NAMES, ['eavt','form','json','mermaid','plantuml','sen','string','svg','xmi']);

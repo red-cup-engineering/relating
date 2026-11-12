@@ -34,7 +34,7 @@ import { tm } from "@red-cup-engineering/computer-data-engineering-services-sect
 import { countTerm, natIsZeroTerm } from "../counting/index.mjs";
 import { compileNamedSen, namedBool } from "@red-cup-engineering/computer-code-engineering-services-section/semiotic-expression-notation/named-codec";
 import { namedArray, namedObject, namedString } from "@red-cup-engineering/computer-code-engineering-services-section/semiotic-expression-notation/named-codec";
-import { readingAs, readingFamilies } from "@red-cup-engineering/computer-data-engineering-services-section/four";
+import { readingAs, readingFamilies } from "@red-cup-engineering/metrologic/four";
 
 const CHARGE_NAMES = readingFamilies.knowledge;
 

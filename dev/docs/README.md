@@ -15,3 +15,9 @@ These docs are for maintainers changing `@red-cup-engineering/agentic-relation-e
 
 Maintenance rule: keep source JSDoc and TypeDoc closest to the machine contract, then user docs, then these developer notes.
 When they disagree, fix the farther document or the code; do not let prose drift away from the export map.
+
+## Historical implementation designs
+
+The [June 28 Node realization contract](../../content/text/documents/articles/notes/history/2026/06/28/README.md)
+retains the original implementation design and source identities. It is historical
+evidence, not the current export/build contract.

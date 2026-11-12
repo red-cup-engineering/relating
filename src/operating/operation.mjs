@@ -24,8 +24,8 @@ import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/co
 import { shiftSen, tm, ty } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
 import { checkTy, tyEqual } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/typing";
 import { decodeDescriptor, descriptorTy, encodeDescriptor } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/json-codec";
-import { evaluate } from "@red-cup-engineering/computer-code-engineering-services-section/semiotic-expression-notation/eval";
-import { evaluateRunTerm, primitives } from "@red-cup-engineering/signcraft/primitives";
+import { evaluate, evaluateRunTerm } from "@red-cup-engineering/computer-code-engineering-services-section/semiotic-expression-notation/eval";
+import { primitives } from "@red-cup-engineering/signcraft/primitives";
 import { jsonResource, canonicalJson } from "@red-cup-engineering/json-services-section";
 import { auditSchemaOperation, schemaOperationsCompose } from "@red-cup-engineering/signchain/contracts/contract-operation";
 import { isOperationHandlerResult } from "./execution-context.mjs";
@@ -155,7 +155,7 @@ export function createOperationCatalog(operations) {
 function senBody(spec) {
   const program = spec.runTerm;
   if (spec.inputDescriptor === undefined && spec.outputDescriptor === undefined) {
-    return (input) => evaluateRunTerm(program, jsonResource(input, `operation ${spec.verb} input`));
+    return (input) => evaluateRunTerm(program, jsonResource(input, `operation ${spec.verb} input`), primitives);
   }
   const domain = descriptorTy(spec.inputDescriptor);
   const codomain = descriptorTy(spec.outputDescriptor);

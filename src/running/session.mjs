@@ -20,8 +20,8 @@
 
 import { classifyRegime, closureRegimeData, cohomologyVanishesInRegime } from "@red-cup-engineering/metrologic/articulation/predicating/positing/settling/value-category";
 import { pricedNerve } from "@red-cup-engineering/signgraph/cohomology";
-import { assignments, empiricalModel, hasGlobalSection, measurementScenario } from "@red-cup-engineering/metrologic/models/physics/models/quantum-contextuality/measurement-scenario";
-import { logicallyContextual } from "@red-cup-engineering/metrologic/models/physics/models/quantum-contextuality/contextual-obstruction";
+import { assignments, empiricalModel, hasGlobalSection, measurementScenario } from "@red-cup-engineering/signcraft/physical/contextuality/measurement-scenario";
+import { logicallyContextual } from "@red-cup-engineering/signcraft/physical/contextuality/contextual-obstruction";
 import { slugify } from "@red-cup-engineering/computer-text-content-engineering-services-section/slugify-text";
 import { statementCell } from "@red-cup-engineering/eavt-engineering-services-section/statement";
 import { address, utteranceCell } from "@red-cup-engineering/signcell/cell";

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { tm } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
-import { operation, operationAs } from "../../../src/operating/operation.mjs";
+import { lazyOperation, operation, operationAs, operationDescriptor, operationFromDescriptor, programObject, programSchemaContract, withOperationArguments } from "../../../src/operating/operation.mjs";
 import { schemaContractFromDescriptor } from "../../../src/operating/operation-declaration.mjs";
 
 test("an operation has one body: a host function, a SEN term or a program, never two", () => {
@@ -42,4 +42,41 @@ test("closed descriptors preserve strict instance admission without changing leg
   assert.equal(strict.assert(data), data);
   assert.equal(legacy.validate(candidate), true);
   assert.ok(reads > 0);
+});
+
+
+test("effect evidence distinguishes author declarations without changing the operation address", () => {
+  const spec = { verb: "observed-effect", run: input => input };
+  const inferred = operation(spec);
+  const declared = operation({ ...spec, effects: inferred.effects });
+  assert.equal(inferred.ref, declared.ref);
+  assert.deepEqual(inferred.executionEvidence, { effects: "inferred", body: "host-handler" });
+  assert.deepEqual(declared.executionEvidence, { effects: "declared", body: "host-handler" });
+  const program = programObject(declared);
+  assert.equal(programSchemaContract.validate(program), true);
+  assert.equal(Object.hasOwn(program, "executionEvidence"), false, "the existing wire schema stays compatible");
+  assert.equal(programSchemaContract.validate(programObject(operation({
+    verb: "term-effect", runTerm: tm.lam(tm.var(0)),
+  }))), true);
+  for (const entry of [inferred, declared]) {
+    assert.strictEqual(operationAs(entry, "alias").executionEvidence, entry.executionEvidence);
+    assert.strictEqual(withOperationArguments(entry, {}).executionEvidence, entry.executionEvidence);
+  }
+});
+
+test("persisted or reconstructed operations cannot infer author evidence from effective defaults", async () => {
+  const original = operation({ verb: "deferred", run: input => input });
+  const descriptor = operationDescriptor(original);
+  const lazy = lazyOperation(descriptor, () => [original]);
+  assert.equal(Object.hasOwn(descriptor, "executionEvidence"), false);
+  assert.equal(Object.hasOwn(lazy, "executionEvidence"), false);
+  assert.equal(Object.hasOwn(operationAs(lazy, "deferred-alias"), "executionEvidence"), false);
+  assert.equal(await lazy.execute(42, {}), 42);
+
+  const addressed = operation({
+    verb: "addressed-effect",
+    program: { kind: "jsnode", closure: "ni:///sha-256;" + "A".repeat(43), module: "./source.mjs", export: "read" },
+  });
+  assert.equal(addressed.executionEvidence.body, "jsnode");
+  assert.equal(Object.hasOwn(operationFromDescriptor(operationDescriptor(addressed)), "executionEvidence"), false);
 });

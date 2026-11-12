@@ -177,7 +177,16 @@ function senBody(spec) {
  * binds the host body or SEN term at construction and checks each invocation.
  */
 export function operation(spec) {
-  const value = { ...operationDeclaration(spec) };
+  const evidence = Object.freeze({
+    effects: spec.effects === undefined ? "inferred" : "declared",
+    body: spec.program !== undefined ? "jsnode" : spec.runTerm !== undefined ? "sen-evaluator" : "host-handler",
+  });
+  return operationWithEvidence(spec, evidence);
+}
+
+function operationWithEvidence(spec, evidence) {
+  const value = { ...operationDeclaration(spec),
+    ...(evidence === undefined ? {} : { executionEvidence: evidence }) };
   const program = spec.program === undefined ? undefined : value.body;
   const execute = createOperationExecutor({
     id: spec.verb,
@@ -195,7 +204,9 @@ export function operation(spec) {
 /** Reconstitute an admitted executable descriptor without loading an ambient operation family. */
 export function operationFromDescriptor(descriptor) {
   if (descriptor.body?.kind !== "jsnode") throw new TypeError("operation: descriptor has no admitted JavaScript programme");
-  const value = operation({ ...descriptor, program: descriptor.body,
+  // Persisted descriptors contain the effective class but do not attest how
+  // the supplier chose it. Reconstruction must not promote it to declared.
+  const value = operationWithEvidence({ ...descriptor, program: descriptor.body,
     domain: schemaContractFromDescriptor(descriptor.domain), codomain: schemaContractFromDescriptor(descriptor.codomain) });
   if (value.ref !== descriptor.ref) throw new TypeError("operation: executable descriptor address mismatch");
   return value;
@@ -238,7 +249,7 @@ function bindExecution(value, execute) {
 
 export function operationAs(source, verb = source.verb) {
   if (verb === source.verb) return source;
-  const alias = operation({
+  const alias = operationWithEvidence({
   verb,
   ...(source.body?.kind === "jsnode" ? { program: source.body } : {}),
   reads: source.reads,
@@ -258,7 +269,7 @@ export function operationAs(source, verb = source.verb) {
   // The alias carries its source's one body: its programme, its SEN term, or else a host run that
   // defers to the source. Execution always defers to the source (bindExecution).
   ...(source.body?.kind === "jsnode" || source.runTerm !== undefined ? {} : { run: (input, args, context) => source.execute(input, args, context) }),
-  });
+  }, source.executionEvidence);
   return bindExecution(alias, (input, args, context) => source.execute(input, args, context));
 }
 

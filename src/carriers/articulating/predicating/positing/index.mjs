@@ -1,5 +1,5 @@
 
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 import { kindCarrier } from "../../../kind.mjs";
 import { readingSchema } from "@red-cup-engineering/metrologic/four";
 

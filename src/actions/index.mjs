@@ -48,7 +48,7 @@ import {
 } from "../carriers/articulating/predicating/positing/settling/index.mjs";
 import { inspectionReportCarrier } from "../carriers/running/index.mjs";
 import { generateDeclaration } from "../writing/print.mjs";
-import { jsonResource } from "@red-cup-engineering/json-services-section";
+import { jsonResource } from "@red-cup-engineering/json-engineering-services-section";
 
 // — the descent as SEN over the Sign packages' primitives (running/primitives) —
 

@@ -28,7 +28,7 @@ import { address, utteranceCell } from "@red-cup-engineering/signcell/cell";
 import { claimSessionObservationContract, claimSessionRegimeAt } from "./session-schema.mjs";
 import { omegaOrdinal } from "@red-cup-engineering/metrologic/articulation/predicating/positing/settling/closure";
 import { ofNat } from "@red-cup-engineering/metrologic/articulation/predicating/positing/settling/analysis/ordinal-closure";
-import { isJsonRecord } from "@red-cup-engineering/json-services-section";
+import { isJsonRecord } from "@red-cup-engineering/json-engineering-services-section";
 import { knowledgeJoinReading, isReading, readingAs, readingOfSides } from "@red-cup-engineering/metrologic/four";
 
 /** An uttered claim's reflexive SignCell and its address. */

@@ -1,5 +1,5 @@
 /** Boundary contracts for claim-session readings: claims, observations, bundles, glued settlements and continuations. */
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 import { readingFamilies } from "@red-cup-engineering/metrologic/four";
 import { closureRegimeName, closureRegimeNamed, closureRegimeNames, omegaOrdinal } from "@red-cup-engineering/metrologic/articulation/predicating/positing/settling/closure";
 import { ofNat, regimeOfOrdinal } from "@red-cup-engineering/metrologic/articulation/predicating/positing/settling/analysis/ordinal-closure";

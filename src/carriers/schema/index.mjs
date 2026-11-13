@@ -3,7 +3,7 @@
  * It may import values and contract declarations, but it must not import records, logic, fixpoint, math, codecs, capability, rendering, or search.
  */
 
-export { SchemaContractSchema, schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+export { SchemaContractSchema, schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 export {
   schemaConformanceVerdictSchema,
   schemaConformanceVerdict,
@@ -22,9 +22,9 @@ export {
   objectType,
   union,
   intersection,
-} from "@red-cup-engineering/json-schema-services-section/structural-type";
+} from "@red-cup-engineering/json-schema-engineering-services-section/structural-type";
 
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 import { cellSchema, utteranceSchema } from "@red-cup-engineering/signcell/cell";
 
 /** The base admission schema: an utterance, a token and a claim (SignCell). */

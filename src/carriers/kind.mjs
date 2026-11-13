@@ -1,4 +1,4 @@
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 
 /** A JSON object carrier identified by its `kind` discriminator. */
 export const kindCarrier = (

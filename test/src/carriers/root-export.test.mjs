@@ -1,4 +1,4 @@
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { articulationCellCarrier, memeCarrier, tmCarrier, tyCarrier, utteranceCarrier } from "@red-cup-engineering/relating/carriers";

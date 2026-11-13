@@ -19,7 +19,7 @@ export { timeAnchorSchema, timeAnchorCarrier, timestampedWitnessSchema, timestam
 export { mementoSnapshotSchema, mementoSnapshotCarrier, timeMapSchema, timeMapCarrier } from "@red-cup-engineering/eavt-engineering-services-section/ledger/memento-schema";
 export { presentedCategoryDiagramSchema, presentedCategoryDiagramCarrier } from "@red-cup-engineering/signgraph/diagram-schema";
 
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 import { cellSchema, utteranceSchema } from "@red-cup-engineering/signcell/cell";
 import { evidenceSchema } from "@red-cup-engineering/signchain/bilattice";
 import { TySchema, TmSchema } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";

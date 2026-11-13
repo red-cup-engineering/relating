@@ -10,7 +10,7 @@
  * `gluedClaimSessionsSchema`/`growth` incident this generalizes.
  */
 
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 
 /** One piece of runtime material claimed to inhabit a schema contract, with where it
  *  came from (a state-cut path, a claim-session row address, a live derive

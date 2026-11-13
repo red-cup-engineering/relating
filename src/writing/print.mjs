@@ -8,8 +8,8 @@
  *
  * @packageDocumentation
  */
-import { canonical } from "@red-cup-engineering/json-services-section";
-import { realize, realizeDefs } from "@red-cup-engineering/json-schema-services-section/realize";
+import { canonical } from "@red-cup-engineering/json-engineering-services-section";
+import { realize, realizeDefs } from "@red-cup-engineering/json-schema-engineering-services-section/realize";
 
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 

@@ -1,4 +1,4 @@
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 
 /** A serializable morphism face. The executable `run` is intentionally outside this schema. */
 export const inspectionReportCarrier = schemaFrom({

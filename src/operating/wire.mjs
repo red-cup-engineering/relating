@@ -28,7 +28,7 @@ export { WIRE_CODEC_NAMES } from "./wire-vocabulary.mjs";
  * layer inherits the SEN admission boundary; it does not make arbitrary host code
  * safe to read.
  */
-import { canonical, parse as parseJson } from "@red-cup-engineering/json-services-section";
+import { canonical, parse as parseJson } from "@red-cup-engineering/json-engineering-services-section";
 import { jsonProjector } from "@red-cup-engineering/computer-content-engineering-services-section/json-projector";
 import { eavtProjector, parse as parseEavt, serialize as serializeEavt } from "@red-cup-engineering/eavt-engineering-services-section/row";
 import { svgProjector } from "@red-cup-engineering/signgraph/diagram-svg";

@@ -20,13 +20,13 @@
 import { executeJavascriptProgram } from "@red-cup-engineering/javascript-module-closure-service/execute-javascript-program";
 import { mark, utterance } from "@red-cup-engineering/signcell/utterance";
 import { createOperationExecutor } from "@red-cup-engineering/computer-code-engineering-services-section/typed-operation";
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 import { shiftSen, tm, ty } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
 import { checkTy, tyEqual } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/typing";
 import { decodeDescriptor, descriptorTy, encodeDescriptor } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/json-codec";
 import { evaluate, evaluateRunTerm } from "@red-cup-engineering/computer-code-engineering-services-section/semiotic-expression-notation/eval";
 import { primitives } from "@red-cup-engineering/signcraft/primitives";
-import { jsonResource, canonicalJson } from "@red-cup-engineering/json-services-section";
+import { jsonResource, canonicalJson } from "@red-cup-engineering/json-engineering-services-section";
 import { auditSchemaOperation, schemaOperationsCompose } from "@red-cup-engineering/signchain/contracts/contract-operation";
 import { isOperationHandlerResult } from "./execution-context.mjs";
 import { operationDeclaration, operationDescriptor, schemaContractFromDescriptor, admitOperationDescriptor } from "./operation-declaration.mjs";

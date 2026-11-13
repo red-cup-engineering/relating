@@ -13,7 +13,7 @@
 
 /** Immutable context supplied to a process-local handler by the governed dispatcher. */
 
-import { requireJsonValue } from "@red-cup-engineering/json-services-section";
+import { requireJsonValue } from "@red-cup-engineering/json-engineering-services-section";
 
 /** Process-local handler return carrying durable effect causes to the dispatcher. */
 

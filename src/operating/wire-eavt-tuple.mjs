@@ -6,7 +6,7 @@ import {
 } from "./wire.mjs";
 
 import { parse, toEavt } from "@red-cup-engineering/eavt-engineering-services-section/row";
-import { serializeLines } from "@red-cup-engineering/jsonl-services-section";
+import { serializeLines } from "@red-cup-engineering/jsonl-engineering-services-section";
 
 export * from "./wire.mjs";
 

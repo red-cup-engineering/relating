@@ -1,4 +1,4 @@
-import { schemaFrom } from "@red-cup-engineering/json-schema-services-section/contracts";
+import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 
 const idSchema = { type: "string", minLength: 1 };
 const stringArraySchema = { type: "array", items: idSchema };

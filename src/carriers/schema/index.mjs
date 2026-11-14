@@ -25,10 +25,11 @@ export {
 } from "@red-cup-engineering/json-schema-engineering-services-section/structural-type";
 
 import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
-import { cellSchema, utteranceSchema } from "@red-cup-engineering/signcell/cell";
+import { cellSchema } from "@red-cup-engineering/signcell/cell";
+import { utteranceSchema, articulationCellSchema } from "@red-cup-engineering/signcell/utterance";
 
 /** The base admission schema: an utterance, a token and a claim (SignCell). */
 export const utteranceSchemaContract = schemaFrom(utteranceSchema);
 
 /** An articulated utterance: its reflexive cell, told for by its token (a SignCell). */
-export const articulationCellSchemaContract = schemaFrom(cellSchema);
+export const articulationCellSchemaContract = schemaFrom(articulationCellSchema);

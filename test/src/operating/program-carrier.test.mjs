@@ -32,7 +32,7 @@ test("workerd retains host and SEN operations and refuses only the unavailable J
   const source = `
     import assert from 'node:assert/strict';
     import { operation } from ${JSON.stringify(operationUrl)};
-    import { tm } from '@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation';
+    import { tm } from '@red-cup-engineering/computer-code-engine/semiotic-expression-notation';
     assert.equal(operation({ verb: 'host', run: input => input + 1 }).execute(4, {}), 5);
     assert.deepEqual(operation({ verb: 'sen', runTerm: tm.lam(tm.var(0)) }).execute({ kept: true }, {}), { kept: true });
     const program = { kind: 'jsnode', closure: 'ni:///sha-256;' + 'a'.repeat(43), module: 'fixture/program.mjs', export: 'run' };

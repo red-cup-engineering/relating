@@ -31,9 +31,9 @@ export { WIRE_CODEC_NAMES } from "./wire-vocabulary.mjs";
 import { canonical, parse as parseJson } from "@red-cup-engineering/json-engineering-services-section";
 import { jsonProjector } from "@red-cup-engineering/computer-content-engineering-services-section/json-projector";
 import { eavtProjector, parse as parseEavt, serialize as serializeEavt } from "@red-cup-engineering/eavt-engineering-services-section/row";
-import { svgProjector } from "@red-cup-engineering/signgraph/diagram-svg";
+import { svgProjector } from "@red-cup-engineering/computer-content-engineering-services-section/diagram/svg";
 import { mermaidProjector, umlProjector, plantUmlProjector } from "@red-cup-engineering/computer-content-engineering-services-section/diagram";
-import { senProjector } from "@red-cup-engineering/computer-code-engineering-services-section/semiotic-expression-notation/projector";
+import { senProjector } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/projector";
 import { stringProjector } from "@red-cup-engineering/computer-content-engineering-services-section/text-projector";
 import {
   cornerOf,

@@ -5,9 +5,9 @@
 import { artifactId } from "@red-cup-engineering/semiotic-eavt-engineering-services-section/identity";
 import { canonicalJson, canonicalizeJson, JSON_RESOURCE_ENVELOPE } from "@red-cup-engineering/json-engineering-services-section";
 import { schemaFromGraph } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
-import { ty } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
-import { checkTy } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/typing";
-import { descriptorTy } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/json-codec";
+import { ty } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation";
+import { checkTy } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/typing";
+import { descriptorTy } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/json-codec";
 import { requireWireName } from "./wire-vocabulary.mjs";
 
 function effectsOf(spec) {

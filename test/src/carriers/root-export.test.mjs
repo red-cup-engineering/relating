@@ -1,8 +1,8 @@
-import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
+import { schemaFrom, schemaFromGraph } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { articulationCellCarrier, memeCarrier, tmCarrier, tyCarrier, utteranceCarrier } from "@red-cup-engineering/relating/carriers";
-import { articulate, utterance } from "@red-cup-engineering/signcell/cell";
+import { articulate, utterance } from "@red-cup-engineering/signcell/utterance";
 
 describe("src/carriers package realization", () => {
   it("realizes pure shapes as runtime carriers with stable ids", () => {
@@ -10,7 +10,7 @@ describe("src/carriers package realization", () => {
       [utteranceCarrier.id, articulationCellCarrier.id, memeCarrier.id, tyCarrier.id, tmCarrier.id],
       [
         "relating/articulating/utterance",
-        "https://schemas.561.group/signcell/cell.schema.json",
+        "relating/articulating/articulation-cell",
         "https://schemas.561.group/signcell/cell.schema.json",
         "semiotic-expression-notation/term/ty",
         "semiotic-expression-notation/term/tm",
@@ -22,10 +22,10 @@ describe("src/carriers package realization", () => {
     const admitted = utterance("left", "right");
     assert.equal(utteranceCarrier.validate(admitted), true);
     assert.equal(utteranceCarrier.validate({ kind: "utterance.carrier" }), false);
-    assert.equal(articulationCellCarrier.validate(articulate("left", "right")), true);
+    assert.equal(articulationCellCarrier.validate(articulate(admitted)), true);
   });
 
-  it("keeps one immutable schema meaning for each carrier identity", () => {
+  it("keeps immutable carriers and refuses identity collisions in an explicit schema graph", () => {
     const first = schemaFrom({
       $id: "relating/test/carrier-registry/equivalent",
       type: "object",
@@ -40,8 +40,11 @@ describe("src/carriers package realization", () => {
     });
     assert.strictEqual(repeated, first);
     assert.throws(
-      () => schemaFrom({ $id: first.id, type: "string" }),
-      /incompatible schema redefinition/u,
+      () => schemaFromGraph({ root: first.id, schemas: [
+        { id: first.id, schema: first.schema },
+        { id: first.id, schema: { $id: first.id, type: "string" } },
+      ] }),
+      /Invalid schema graph/u,
     );
   });
 

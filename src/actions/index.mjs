@@ -32,10 +32,10 @@
 import { operation } from "../operating/operation.mjs";
 import { isUtterance, utterance } from "@red-cup-engineering/signcell/cell";
 import { utteranceCarrier, articulationCellCarrier } from "../carriers/index.mjs";
-import { tm } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
-import { objectTerm, arrayTerm, stringTerm } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/json-codec";
-import { inferTy, isClosed, termSize, termUses } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/typing";
-import { contentAddressOf } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/semantic-content-identity";
+import { tm } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation";
+import { objectTerm, arrayTerm, stringTerm } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/json-codec";
+import { inferTy, isClosed, termSize, termUses } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/typing";
+import { contentAddressOf } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/semantic-content-identity";
 import { predicationSiteCarrier } from "../carriers/articulating/predicating/index.mjs";
 import { readingNameCarrier, positPresheafCarrier } from "../carriers/articulating/predicating/positing/index.mjs";
 import {

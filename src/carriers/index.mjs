@@ -17,18 +17,19 @@ export { readingDescriptorSchema, readingDescriptorCarrier, logReadingDescriptor
 export { structuralProvenanceSignatureSchema, structuralProvenanceSignatureCarrier, signedProvenanceSourceSchema, signedProvenanceSourceCarrier, attestationLinkSchema, attestationLinkCarrier, provenanceReadingSchema, provenanceReadingCarrier } from "@red-cup-engineering/eavt-engineering-services-section/ledger/provenance-schema";
 export { timeAnchorSchema, timeAnchorCarrier, timestampedWitnessSchema, timestampedWitnessCarrier, timeAnchorReadingSchema, timeAnchorReadingCarrier } from "@red-cup-engineering/eavt-engineering-services-section/ledger/time-anchor-schema";
 export { mementoSnapshotSchema, mementoSnapshotCarrier, timeMapSchema, timeMapCarrier } from "@red-cup-engineering/eavt-engineering-services-section/ledger/memento-schema";
-export { presentedCategoryDiagramSchema, presentedCategoryDiagramCarrier } from "@red-cup-engineering/signgraph/diagram-schema";
+export { presentedCategoryDiagramSchema, presentedCategoryDiagramCarrier } from "@red-cup-engineering/computer-content-engineering-services-section/diagram/schema";
 
 import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
-import { cellSchema, utteranceSchema } from "@red-cup-engineering/signcell/cell";
+import { cellSchema } from "@red-cup-engineering/signcell/cell";
+import { utteranceSchema, articulationCellSchema } from "@red-cup-engineering/signcell/utterance";
 import { evidenceSchema } from "@red-cup-engineering/signchain/bilattice";
-import { TySchema, TmSchema } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
+import { TySchema, TmSchema } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation";
 
 /** The base admission carrier: an utterance, a token and a claim (SignCell). */
 export const utteranceCarrier = schemaFrom(utteranceSchema);
 
 /** An articulated utterance: its reflexive cell, told for by its token (a SignCell). */
-export const articulationCellCarrier = schemaFrom(cellSchema);
+export const articulationCellCarrier = schemaFrom(articulationCellSchema);
 
 /** A meme: a predication cell with the evidence told for and against it — a SignCell. */
 export const memeCarrier = schemaFrom(cellSchema);

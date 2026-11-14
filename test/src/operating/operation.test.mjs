@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { tm } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
+import { tm } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation";
 import { lazyOperation, operation, operationAs, operationDescriptor, operationFromDescriptor, programObject, programSchemaContract, withOperationArguments } from "../../../src/operating/operation.mjs";
 import { schemaContractFromDescriptor } from "../../../src/operating/operation-declaration.mjs";
 

@@ -19,12 +19,11 @@
 // into workerd. Source capture/admission remains a separate Node-hosted capability.
 import { executeJavascriptProgram } from "@red-cup-engineering/javascript-module-closure-service/execute-javascript-program";
 import { mark, utterance } from "@red-cup-engineering/signcell/utterance";
-import { createOperationExecutor } from "@red-cup-engineering/computer-code-engineering-services-section/typed-operation";
 import { schemaFrom } from "@red-cup-engineering/json-schema-engineering-services-section/contracts";
-import { shiftSen, tm, ty } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
-import { checkTy, tyEqual } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/typing";
-import { decodeDescriptor, descriptorTy, encodeDescriptor } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/json-codec";
-import { evaluate, evaluateRunTerm } from "@red-cup-engineering/computer-code-engineering-services-section/semiotic-expression-notation/eval";
+import { shiftSen, tm, ty } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation";
+import { checkTy, tyEqual } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/typing";
+import { decodeDescriptor, descriptorTy, encodeDescriptor } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/json-codec";
+import { evaluate, evaluateRunTerm } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/eval";
 import { primitives } from "@red-cup-engineering/signcraft/primitives";
 import { jsonResource, canonicalJson } from "@red-cup-engineering/json-engineering-services-section";
 import { auditSchemaOperation, schemaOperationsCompose } from "@red-cup-engineering/signchain/contracts/contract-operation";
@@ -188,15 +187,26 @@ function operationWithEvidence(spec, evidence) {
   const value = { ...operationDeclaration(spec),
     ...(evidence === undefined ? {} : { executionEvidence: evidence }) };
   const program = spec.program === undefined ? undefined : value.body;
-  const execute = createOperationExecutor({
-    id: spec.verb,
-    ...(spec.domain === undefined ? {} : { domain: spec.domain }),
-    ...(spec.codomain === undefined ? {} : { codomain: spec.codomain }),
-    run: spec.program === undefined ? (spec.run ?? senBody(spec)) : (input, args, context) => executeJavascriptProgram(program, input, args, context),
-    projectOutput: (output, assertOutput) => isOperationHandlerResult(output)
+  // Relating owns this declared operation's invocation. Schema contracts own
+  // admission, the selected body owner owns execution, and this boundary retains
+  // host arguments and handler metadata without imposing a Node JSON transport.
+  const { domain, codomain, verb } = value;
+  const run = spec.program === undefined ? (spec.run ?? senBody(spec))
+    : (input, args, context) => executeJavascriptProgram(program, input, args, context);
+  const finish = output => {
+    const assertOutput = value => codomain === undefined ? value
+      : codomain.assert(value, `operation ${verb} output`);
+    return isOperationHandlerResult(output)
       ? Object.freeze({ ...output, value: assertOutput(output.value) })
-      : assertOutput(output),
-  });
+      : assertOutput(output);
+  };
+  const execute = (input, args, context) => {
+    const received = domain === undefined ? input
+      : domain.assert(input, `operation ${verb} input`);
+    const output = run(received, args, context);
+    return output !== null && (typeof output === "object" || typeof output === "function")
+      && typeof output.then === "function" ? Promise.resolve(output).then(finish) : finish(output);
+  };
   const executable = Object.defineProperty(value, "execute", { value: execute });
   return Object.freeze(executable);
 }

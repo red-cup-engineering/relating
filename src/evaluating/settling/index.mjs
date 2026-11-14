@@ -12,8 +12,8 @@
  * calculus before reader terms inspect them. This keeps finite settlement reads
  * portable without claiming this module is a general transfinite closure engine.
  */
-import {          tm } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation";
-import { objectTerm, arrayTerm, stringTerm } from "@red-cup-engineering/computer-data-engineering-services-section/semiotic-expression-notation/json-codec";
+import {          tm } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation";
+import { objectTerm, arrayTerm, stringTerm } from "@red-cup-engineering/computer-code-engine/semiotic-expression-notation/json-codec";
 
 // ── generic list combinators ──────────────────────────────────────────────────
 

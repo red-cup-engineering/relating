@@ -1,0 +1,33 @@
+{
+  "name": "@red-cup-engineering/relating",
+  "version": "0.12.0-dev.0",
+  "license": "UNLICENSED",
+  "type": "module",
+  "description": "Relational terms and claim sessions over SignCraft settlement and inference.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/relating.git"
+  },
+  "engines": {
+    "node": ">=24.2.0"
+  },
+  "dependencies": {
+    "@red-cup-engineering/signcraft": "^0.10.1"
+  },
+  "exports": {
+    ".": "./src/index.mjs",
+    "./package.json": "./package.json",
+    "./running/session": "./src/running/session.mjs",
+    "./evaluating/counting": "./src/evaluating/counting.mjs",
+    "./evaluating/connecting": "./src/evaluating/connecting.mjs",
+    "./evaluating/measuring": "./src/evaluating/measuring.mjs",
+    "./evaluating/measuring/regime": "./src/evaluating/regime.mjs",
+    "./evaluating/settling": "./src/evaluating/settling.mjs"
+  },
+  "private": false,
+  "files": [
+    "package.json",
+    "README*",
+    "src"
+  ]
+}

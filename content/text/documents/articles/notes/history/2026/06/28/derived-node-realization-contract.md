@@ -1,4 +1,32 @@
-# Derived Node realization contract for `@emsenn/relating`
+---
+title: "Derived Node realization contract for `@emsenn/relating`"
+description: "The build, import, export, asset, bin and workspace obligations that Node, ESM and PNPM place on the derived architecture of @emsenn/relating."
+date-created: 2026-06-28
+date-modified: 2026-11-19
+type: note
+status: historical
+keywords:
+  - relating
+  - NodeNext
+  - ESM
+  - PNPM
+  - package exports
+  - build projects
+sources:
+  - path: "services/science-services-section/services/information-science-services-section/services/computer-science-services-section/content/text/documents/articles/notes/history/2026/06/28/derived-node-realization-contract.md"
+    date: 2026-06-28
+  - path: "services/science-services-section/services/information-science-services-section/services/computer-science-services-section/content/text/documents/articles/notes/recovered/history/2026/06/28/derived-node-realization-contract.md"
+    date: 2026-06-28
+references:
+  - title: "Relating's implementation owner: derived-node-realization-contract.md (byte-exact historical implementation design)"
+    url: https://github.com/red-cup-engineering/relating/blob/main/content/text/documents/articles/notes/history/2026/06/28/derived-node-realization-contract.md
+  - title: "Relating's implementation owner: README.md (context and both source identities; distinguishes this June 28 design from current requirements)"
+    url: https://github.com/red-cup-engineering/relating/blob/main/content/text/documents/articles/notes/history/2026/06/28/README.md
+  - title: "Original source of the history/ copy"
+    url: https://github.com/lenticule-science/computer-science-services-section/blob/f852fd28e1cd38c9bab90af59dfbeac6becb4156/content/text/documents/articles/notes/history/2026/06/28/derived-node-realization-contract.md
+  - title: "Original source of the recovered/history/ copy"
+    url: https://github.com/lenticule-science/computer-science-services-section/blob/f852fd28e1cd38c9bab90af59dfbeac6becb4156/content/text/documents/articles/notes/recovered/history/2026/06/28/derived-node-realization-contract.md
+---
 
 This document records what the derived architecture means under TypeScript, ESM Node, and PNPM.
 
@@ -230,3 +258,11 @@ node --input-type=module -e "import('@emsenn/relating/<subpath>').then(m => cons
 ```
 
 from an environment where the package resolves by name.
+
+## Provenance
+
+This is a historical June 28 design.
+Its former package scope, build layout and API are not adopted as current behavior.
+The byte-exact historical implementation design is consolidated at the implementation owner linked in `references`.
+Both historical source copies (history/ and recovered/history/) and the received original have Git blob `0c10f9a2e280d68897ac952a46f3a90dff237a37`.
+Scientific and normative SEN dispositions are unchanged.

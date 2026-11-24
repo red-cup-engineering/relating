@@ -1,0 +1,22 @@
+{
+  "status": "historical-source-consolidation",
+  "date": "2026-11-12",
+  "receiver": {
+    "repository": "red-cup-engineering/relating",
+    "path": "content/text/documents/articles/notes/history/2026/06/28/derived-node-realization-contract.md"
+  },
+  "sourceBlob": "0c10f9a2e280d68897ac952a46f3a90dff237a37",
+  "sources": [
+    {
+      "repository": "lenticule-science/computer-science-services-section",
+      "commit": "f852fd28e1cd38c9bab90af59dfbeac6becb4156",
+      "path": "content/text/documents/articles/notes/history/2026/06/28/derived-node-realization-contract.md"
+    },
+    {
+      "repository": "lenticule-science/computer-science-services-section",
+      "commit": "f852fd28e1cd38c9bab90af59dfbeac6becb4156",
+      "path": "content/text/documents/articles/notes/recovered/history/2026/06/28/derived-node-realization-contract.md"
+    }
+  ],
+  "disposition": "One byte-exact historical implementation design at its implementation owner. Not adopted as current API, build or architecture requirements."
+}
